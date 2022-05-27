@@ -81,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     };
                     print(data);
                     var responseRegister =
-                      await networkHandler.post("register", data);
+                      await networkHandler.post("register", body:data);
                     print(responseRegister);
 
                     setState(() {

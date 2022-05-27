@@ -25,21 +25,26 @@ class NetworkHandler {
   }
 //sending username, email and password to blog api.
 
-  Future<http.Response> post(String url, Map<String, String> body) async {
+  Future<http.Response> post(String url, {Map<String, String> body, Map<String,String> header}) async {
     url = formater(url);
     log.d(body);
+    final headers =  {"Content-type": "application/json"};
+    if(header !=null){
+      headers.addAll(header);
+    }
     var response = await http.post(
       url,
-      headers: {"Content-type": "application/json"},
+      headers:headers,
       body: json.encode(body),
     );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      log.i(response.body);
-      return response;
-    }
-    log.d(response.body);
-    log.d(response.statusCode);
+       return response;
+    // if (response.statusCode == 200 || response.statusCode == 201) {
+    //   log.i(response.body);
+    //   return response;
+    // }
+    // log.d(response.body);
+    // log.d(response.statusCode);
   }
 
 //formater takes input  as a string(url) concatenate url with base url and return it.
